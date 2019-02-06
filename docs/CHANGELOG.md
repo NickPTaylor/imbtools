@@ -1,7 +1,7 @@
 Changelog for imbtools
 ======================
 
-0.0.0 (unreleased)
+0.0.0 (2019-02-06)
 ------------------
 
 - Setup other checks.
