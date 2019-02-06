@@ -3,4 +3,4 @@
 
 # imbtools
 
-A flask app for IMB work.
+It intended that this app will provide tools for a range of IMB work.  The first version will provide a web-based tool for authoring and compiling rota reports.  The app is written in Python and uses the Flask framework. 

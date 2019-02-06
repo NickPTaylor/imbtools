@@ -2,10 +2,13 @@
 IMB tools app.
 """
 
+import pkg_resources
+
 from flask import Flask
 
 from . import hello
 
+__version__ = pkg_resources.get_distribution('imbtools').version
 
 def create_app(test_config=None):
     """

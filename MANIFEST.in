@@ -1,0 +1,9 @@
+graft app/templates
+graft app/static
+recursive-include tests *.py
+include *.md
+recursive-include docs *.md
+include .flaskenv
+include .pylintrc
+include *.txt
+global-exclude *.pyc
