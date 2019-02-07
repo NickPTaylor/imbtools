@@ -6,7 +6,8 @@ import pkg_resources
 
 from flask import Flask
 
-from . import hello
+from app.main import BP as MAIN_BP
+from app.report import BP as ROTA_REPORT_BP
 
 __version__ = pkg_resources.get_distribution('imbtools').version
 
@@ -29,6 +30,7 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     # Register blueprints.
-    app.register_blueprint(hello.BP)
+    app.register_blueprint(MAIN_BP)
+    app.register_blueprint(ROTA_REPORT_BP)
 
     return app
