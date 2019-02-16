@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en-UK" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Rota Report</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    </head>
+    <body>
+        <!--- Heading. --->
+        <img src="{{ url_for('static', filename='images/imb-logo.png') }}" alt="IMB logo" width="100" height="55" class="center"/>
+        <h1>Independent Monitoring Board</h1>
+        <h1>Tinsley House IRC and Gatwick PDA</h1>
+        <hr />
+        <h3>Visit Report {{ "{:02d}".format(visit.no) }} / {{ visit.date.year }}</h3>
+        <table>
+            <tr>
+                <th>IMB Member</th>
+                <th>Duty Manager/Oscar 1</th>
+                <th>Date of Shift Handover (attached)</th>
+            </tr>
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ visit.manager }}</td>
+                <td>{{ visit.date_shift_handover }}</td>
+            </tr>
+        </table>
+        <br />
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+            <tr>
+                <td>{{ visit.date.strftime('%d/%m/%y') }}</td>
+                <td>{{ visit.start_time.strftime('%H:%M') }}</td>
+                <td>{{ visit.end_time.strftime('%H:%M') }}</td>
+            </tr>
+        </table>
+        <br />
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Population</th>
+                <th>Visited</th>
+            </tr>
+            <tr>
+                <td>Tinsley House IRC</td>
+                <td>65</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Borders</td>
+                <td>0</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Gatwick PDA</td>
+                <td>4</td>
+                <td>Yest</td>
+            </tr>
+        </table>
+        <br />
+        <!--- ACDT tables. --->
+        <h3>ACDT reports</h3>
+        {% for acdt in acdts %}
+            <table class="new-page">
+                <tr>
+                    <td class="fw-col"><strong>Name</strong></td>
+                    <td class="fw-col">{{ acdt.name }}</td>
+                    <td rowspan="3">{{ acdt.comments }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Nationality</strong></td>
+                    <td>{{ acdt.nationality }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Room</strong></td>
+                    <td>{{ acdt.room_no }}</td>
+                </tr>
+            </table>
+            <br>
+        {% endfor %}
+    </body>
+</html>
