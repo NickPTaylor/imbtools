@@ -1,18 +1,33 @@
 """
-Routes for rota report blueprint.
+Routes for report blueprint.
 """
 
 import datetime
 
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 
 from app.report import BP
+from app.report.forms import ReportForm
 
-
-@BP.route('/report')
-def index():
+@BP.route('/compose', methods=['GET', 'POST'])
+def compose_report():
     """
-    Rota report.
+    Compose rota report.
+
+    :return: A composed submission.
+    :rtype: html
+    """
+    form = ReportForm()
+    if form.validate_on_submit():
+        flash('Report created')
+        return redirect(url_for('report.view_report'))
+    return render_template('compose_report.html', form=form)
+
+
+@BP.route('/view')
+def view_report():
+    """
+    View rota report.
 
     :return: A report.
     :rtype: html
@@ -48,5 +63,5 @@ def index():
         },
     ]
 
-    return render_template('rota_report.html', member=member, visit=visit,
+    return render_template('view_report.html', member=member, visit=visit,
                            acdts=acdts)
