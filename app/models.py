@@ -5,12 +5,12 @@ from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from werkzeug.security import generate_password_hash, check_password_hash
 DB = SQLAlchemy()
 MIGRATE = Migrate()
 
 
-class IMBMember(DB.Model):  # pylint: disable=too-few-public-methods
+class IMBMember(DB.Model):
     """
     IMB member model.
     """
@@ -20,8 +20,27 @@ class IMBMember(DB.Model):  # pylint: disable=too-few-public-methods
     password_hash = DB.Column(DB.String(128))
     visits = DB.relationship('Visit', backref='visitor', lazy='dynamic')
 
+    def set_password(self, password):
+        """
+        Set password_hash property.
+
+        :param password: Plaintext version of password
+        :type password: str
+        """
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        """
+        Check hashed password matches password_hash.
+        :param password: Plain text password.
+        :type password: str
+        :return: Does the password match the hash?
+        :rtype: bool
+        """
+        return check_password_hash(self.password_hash, password)
+
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<Member {}>'.format(self.username)
 
 
 class Visit(DB.Model):  # pylint: disable=too-few-public-methods
