@@ -9,4 +9,9 @@ def test_config():
     Test automatic and manual configuration.
     """
     assert not create_app().testing
-    assert create_app({'TESTING': True}).testing
+    config = {
+        'TESTING': True,
+        'SQLALCHEMY_DATABASE_URI': 'sqlite://:memory:',
+        'SQLALCHEMY_TRACK_MODIFICATIONS': False
+    }
+    assert create_app(config).testing

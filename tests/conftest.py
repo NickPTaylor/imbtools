@@ -10,7 +10,12 @@ def test_app():
     """
     Invoke app factory.
     """
-    app = create_app({'TESTING': True})
+    config = {
+        'TESTING': True,
+        'SQLALCHEMY_DATABASE_URI': 'sqlite://:memory:',
+        'SQLALCHEMY_TRACK_MODIFICATIONS': False
+    }
+    app = create_app(config)
     yield app
 
 @pytest.fixture
