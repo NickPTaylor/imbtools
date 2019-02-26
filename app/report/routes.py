@@ -5,9 +5,11 @@ Routes for report blueprint.
 import datetime
 
 from flask import render_template, flash, redirect, url_for
+from flask import Blueprint
 
-from app.report import BP
 from app.report.forms import ReportForm
+
+BP = Blueprint('report', __name__)
 
 @BP.route('/compose', methods=['GET', 'POST'])
 def compose_report():

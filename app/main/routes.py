@@ -1,7 +1,10 @@
 """
 Blueprint for hello world.
 """
-from app.main import BP
+
+from flask import Blueprint
+
+BP = Blueprint('main', __name__)
 
 @BP.route('/')
 @BP.route('/index')

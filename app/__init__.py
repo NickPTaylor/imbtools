@@ -3,15 +3,15 @@ IMB tools app.
 """
 
 import pkg_resources
+__version__ = pkg_resources.get_distribution('imbtools').version
 
 from flask import Flask
 
-from app.main import BP as MAIN_BP
-from app.report import BP as ROTA_REPORT_BP
+from app.main import MAIN_BP
+from app.report import ROTA_REPORT_BP
+from app.models import DB, MIGRATE
 
 from config import Config
-
-__version__ = pkg_resources.get_distribution('imbtools').version
 
 
 def create_app(test_config=None):
@@ -31,6 +31,9 @@ def create_app(test_config=None):
         app.config.from_object(Config)
     else:
         app.config.from_mapping(test_config)
+
+    DB.init_app(app)
+    MIGRATE.init_app(app, DB)
 
     # Register blueprints.
     app.register_blueprint(MAIN_BP)
