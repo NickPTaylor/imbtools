@@ -8,9 +8,12 @@ __version__ = pkg_resources.get_distribution('imbtools').version
 from flask import Flask
 
 from app.main import MAIN_BP
+from app.auth import AUTH_BP
 from app.report import ROTA_REPORT_BP
-from app.models import DB, MIGRATE, IMBUser, Visit
+from app.models import DB, MIGRATE, LOGIN_MANAGER
+from app.models import IMBUser, Visit
 from config import Config
+
 
 def create_app(test_config=None):
     """
@@ -32,10 +35,12 @@ def create_app(test_config=None):
 
     DB.init_app(app)
     MIGRATE.init_app(app, DB)
+    LOGIN_MANAGER.init_app(app)
 
     # Register blueprints.
     app.register_blueprint(MAIN_BP)
     app.register_blueprint(ROTA_REPORT_BP, url_prefix='/report')
+    app.register_blueprint(AUTH_BP, url_prefix='/auth')
 
     return app
 

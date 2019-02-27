@@ -6,17 +6,32 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin
+
 DB = SQLAlchemy()
 MIGRATE = Migrate()
+LOGIN_MANAGER = LoginManager()
+
+@LOGIN_MANAGER.user_loader
+def load_user(user_id):
+    """
+    Loads user object from database.
+
+    :param user_id: A user ID.
+    :type user_id: str
+    :return: An IMBUser object
+    :rtype: obj
+    """
+    return IMBUser().query.get(int(user_id))
 
 
-class IMBUser(DB.Model):
+class IMBUser(UserMixin, DB.Model):
     """
     IMB member model.
     """
     id = DB.Column(DB.Integer, primary_key=True)
     username = DB.Column(DB.String(64), index=True, unique=True)
-    name = DB.Column(DB.String(64), index=True, unique=True)
+    name = DB.Column(DB.String(64), index=True)
     password_hash = DB.Column(DB.String(128))
     visits = DB.relationship('Visit', backref='visitor', lazy='dynamic')
 

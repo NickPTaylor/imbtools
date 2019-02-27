@@ -7,7 +7,7 @@ import datetime
 from flask import render_template, flash, redirect, url_for
 from flask import Blueprint
 
-from app.report.forms import ReportForm
+from .forms import ReportForm
 
 BP = Blueprint('report', __name__)
 

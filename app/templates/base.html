@@ -1,16 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en-UK" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    {% if imb %}
-        <title>IMB Tools - {{ imb }}</title>
+    {% if title %}
+        <title>IMB Tools - {{ title }}</title>
     {% else %}
-        <title>IMB Tools </title>
+        <title>IMB Tools</title>
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <div>IMB Tools: <a href="{{ url_for('main.index') }}">Home</a></div>
+    <div>IMB Tools: <a href="{{ url_for('main.index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+            <a href="{{ url_for('auth.login') }}">Login</a>
+        {% else %}
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% endif %}
+    </div>
     <hr />
     {% with messages = get_flashed_messages() %}
         {% if messages %}
