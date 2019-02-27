@@ -9,7 +9,7 @@ from flask import Flask
 
 from app.main import MAIN_BP
 from app.report import ROTA_REPORT_BP
-from app.models import DB, MIGRATE, IMBMember, Visit
+from app.models import DB, MIGRATE, IMBUser, Visit
 from config import Config
 
 def create_app(test_config=None):
@@ -50,4 +50,4 @@ def shell_context():
     :return: A dictionary of objects for use in shell context.
     :rtype: dict
     """
-    return {'DB': DB, 'IMBMember': IMBMember, 'Visit': Visit}
+    return {'DB': DB, 'IMBUser': IMBUser, 'Visit': Visit}

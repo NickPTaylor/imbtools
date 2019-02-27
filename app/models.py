@@ -10,7 +10,7 @@ DB = SQLAlchemy()
 MIGRATE = Migrate()
 
 
-class IMBMember(DB.Model):
+class IMBUser(DB.Model):
     """
     IMB member model.
     """
@@ -40,7 +40,7 @@ class IMBMember(DB.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<Member {}>'.format(self.username)
+        return '<IMB User {}>'.format(self.username)
 
 
 class Visit(DB.Model):  # pylint: disable=too-few-public-methods
@@ -48,7 +48,7 @@ class Visit(DB.Model):  # pylint: disable=too-few-public-methods
     Visit model.
     """
     id = DB.Column(DB.Integer, primary_key=True)
-    imb_member = DB.Column(DB.Integer, DB.ForeignKey('imb_member.id'))
+    imb_user = DB.Column(DB.Integer, DB.ForeignKey('imb_user.id'))
     created = DB.Column(DB.DateTime, index=True, default=datetime.utcnow)
     visit_date = DB.Column(DB.Date, index=True)
     visit_start = DB.Column(DB.Time)

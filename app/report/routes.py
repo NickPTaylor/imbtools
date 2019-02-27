@@ -36,7 +36,7 @@ def view_report():
     """
 
     # Mock variables.
-    member = {
+    imb_user = {
         'name': 'Nick Taylor'
     }
     visit = {
@@ -65,5 +65,5 @@ def view_report():
         },
     ]
 
-    return render_template('view_report.html', member=member, visit=visit,
+    return render_template('view_report.html', imb_user=imb_user, visit=visit,
                            acdts=acdts)
