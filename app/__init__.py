@@ -35,6 +35,8 @@ def create_app(test_config=None):
 
     DB.init_app(app)
     MIGRATE.init_app(app, DB)
+
+    LOGIN_MANAGER.login_view = 'auth.login'
     LOGIN_MANAGER.init_app(app)
 
     # Register blueprints.

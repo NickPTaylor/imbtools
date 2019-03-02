@@ -6,12 +6,14 @@ import datetime
 
 from flask import render_template, flash, redirect, url_for
 from flask import Blueprint
+from flask_login import login_required
 
 from .forms import ReportForm
 
 BP = Blueprint('report', __name__)
 
 @BP.route('/compose', methods=['GET', 'POST'])
+@login_required
 def compose_report():
     """
     Compose rota report.
@@ -27,6 +29,7 @@ def compose_report():
 
 
 @BP.route('/view')
+@login_required
 def view_report():
     """
     View rota report.
