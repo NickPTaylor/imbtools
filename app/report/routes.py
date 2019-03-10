@@ -5,11 +5,16 @@ Routes for report blueprint.
 import datetime
 
 from flask import render_template, flash, redirect, url_for
+from flask import Blueprint
+from flask_login import login_required
 
-from app.report import BP
-from app.report.forms import ReportForm
+from .forms import ReportForm
+
+BP = Blueprint('report', __name__)
+
 
 @BP.route('/compose', methods=['GET', 'POST'])
+@login_required
 def compose_report():
     """
     Compose rota report.
@@ -21,10 +26,12 @@ def compose_report():
     if form.validate_on_submit():
         flash('Report created')
         return redirect(url_for('report.view_report'))
-    return render_template('compose_report.html', form=form)
+    return render_template('compose_report.html', title='Compose Rota Report',
+                           form=form)
 
 
 @BP.route('/view')
+@login_required
 def view_report():
     """
     View rota report.
@@ -34,7 +41,7 @@ def view_report():
     """
 
     # Mock variables.
-    member = {
+    imb_user = {
         'name': 'Nick Taylor'
     }
     visit = {
@@ -63,5 +70,5 @@ def view_report():
         },
     ]
 
-    return render_template('view_report.html', member=member, visit=visit,
-                           acdts=acdts)
+    return render_template('view_report.html', title='View Rota Report',
+                           imb_user=imb_user, visit=visit, acdts=acdts)
