@@ -11,13 +11,14 @@ colorama==0.4.1
 coverage==4.0.3
 docutils==0.14
 Flask==1.0.2
+Flask-Login==0.4.1
 Flask-Migrate==2.4.0
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 future==0.17.1
 git-pylint-commit-hook==2.5.1
 idna==2.8
--e git+https://github.com/NickPTaylor/imbtools.git@8181eff19fc4cade0074f6cca12fa04cbf395f54#egg=imbtools
+-e git+https://github.com/NickPTaylor/imbtools.git@fdc379c54ffa14356152a623b2280b46bacf9609#egg=imbtools
 isort==4.3.4
 itsdangerous==1.1.0
 Jinja2==2.10
@@ -27,7 +28,6 @@ MarkupSafe==1.1.0
 mccabe==0.6.1
 more-itertools==5.0.0
 pathlib2==2.3.3
-PIL==1.1.7
 Pillow==5.4.1
 pillowcase==2.0.0
 pkginfo==1.5.0.1
