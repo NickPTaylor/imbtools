@@ -12,6 +12,7 @@ DB = SQLAlchemy()
 MIGRATE = Migrate()
 LOGIN_MANAGER = LoginManager()
 
+
 @LOGIN_MANAGER.user_loader
 def load_user(user_id):
     """

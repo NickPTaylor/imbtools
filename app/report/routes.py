@@ -12,6 +12,7 @@ from .forms import ReportForm
 
 BP = Blueprint('report', __name__)
 
+
 @BP.route('/compose', methods=['GET', 'POST'])
 @login_required
 def compose_report():
@@ -25,7 +26,8 @@ def compose_report():
     if form.validate_on_submit():
         flash('Report created')
         return redirect(url_for('report.view_report'))
-    return render_template('compose_report.html', form=form)
+    return render_template('compose_report.html', title='Compose Rota Report',
+                           form=form)
 
 
 @BP.route('/view')
@@ -68,5 +70,5 @@ def view_report():
         },
     ]
 
-    return render_template('view_report.html', imb_user=imb_user, visit=visit,
-                           acdts=acdts)
+    return render_template('view_report.html', title='View Rota Report',
+                           imb_user=imb_user, visit=visit, acdts=acdts)

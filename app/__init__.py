@@ -49,8 +49,9 @@ def create_app(test_config=None):
 
 APP = create_app()
 
+
 @APP.shell_context_processor
-def shell_context():
+def shell_context():  # pragma: no cover
     """
     Make shell context.
 

@@ -12,6 +12,7 @@ from .forms import LoginForm
 
 BP = Blueprint('auth', __name__)
 
+
 @BP.route('/login', methods=['GET', 'POST'])
 def login():
     """
@@ -20,8 +21,9 @@ def login():
     :return: Login page.
     :rtype: html
     """
+    # Redirect to index if the user is already authenticated.
     if current_user.is_authenticated:
-        return redirect(url_for('report.compose_report'))
+        return redirect(url_for('main.index'))
 
     form = LoginForm()
 
@@ -41,6 +43,7 @@ def login():
         return redirect(next_page)
 
     return render_template('login.html', title='Sign In', form=form)
+
 
 @BP.route('/logout')
 def logout():
