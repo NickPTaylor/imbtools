@@ -28,7 +28,7 @@ MarkupSafe==1.1.0
 mccabe==0.6.1
 more-itertools==5.0.0
 pathlib2==2.3.3
-Pillow==5.4.1
+Pillow==8.3.2
 pillowcase==2.0.0
 pkginfo==1.5.0.1
 pluggy==0.8.1
